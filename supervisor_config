@@ -1,0 +1,23 @@
+; замініть назву main свою, а також пропишіть свій шлях до скрипту та віртуального середовище venv
+
+[program:main]
+command=/home/user/e-bot/venvE/bin/python3 /home/user/e-bot/main.py
+directory=/home/user/e-bot
+
+autostart=true
+autorestart=unexpected
+startsecs=5
+startretries=2
+
+stopsignal=INT
+stopwaitsecs=60
+
+
+redirect_stderr=true
+stdout_logfile=/home/user/e-bot/main.log
+
+stdout_logfile_maxbytes=50MB
+stdout_logfile_backups=50
+stdout_capture_maxbytes=1MB
+stdout_events_enabled=false
+loglevel=warn
