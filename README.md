@@ -80,7 +80,7 @@
   sudo certbot renew --dry-run
 `
 
-Тепер саме найцікавіш, необхідно змінити конфігурацію доменних імен. Сам код конфігурації знаходиться в файлі !!! Тільки перед цим замініть elxserver.pp.ua на Ваш домен. А також вкажіть порт, на якому працюватиме ваш скрипт NodeJS (в моєму випадку, це 3002 порт), щоб nginx міг правильно перенаправляти. Для редагування актуального кофігуратора пропишіть команду з шляхом:
+Тепер саме найцікавіш, необхідно змінити конфігурацію доменних імен. Сам код конфігурації знаходиться в файлі **[nginx_https_config](https://github.com/andrii-petlovanyi/nginx-nodejs_mysetup/blob/main/nginx_https_config)**! Тільки перед цим замініть elxserver.pp.ua на Ваш домен. А також вкажіть порт, на якому працюватиме ваш скрипт NodeJS (в моєму випадку, це 3002 порт), щоб nginx міг правильно перенаправляти. Для редагування актуального кофігуратора пропишіть команду з шляхом:
 
 `
   sudo vim /etc/nginx/sites-available/default
@@ -145,31 +145,7 @@ echo_supervisord_conf > /etc/supervisor/supervisord.conf
   sudo vim /etc/supervisor/supervisord.conf
 `
 
-А тепер, щоб супервізор знав про існування нашого боту, та міг управляти ним, нам потрібно додати наступний код, тільки перед цим замініть імя main на імя вашого скрипта, а також вкажіть шлях до середовища venv та самого скрипта:
-
-`
-[program:main]
-command=/home/user/e-bot/venvE/bin/python3 /home/user/e-bot/main.py
-directory=/home/user/e-bot
-
-autostart=true
-autorestart=unexpected
-startsecs=5
-startretries=2
-
-stopsignal=INT
-stopwaitsecs=60
-
-
-redirect_stderr=true
-stdout_logfile=/home/user/e-bot/main.log
-
-stdout_logfile_maxbytes=50MB
-stdout_logfile_backups=50
-stdout_capture_maxbytes=1MB
-stdout_events_enabled=false
-loglevel=warn
-`
+А тепер, щоб супервізор знав про існування нашого боту, та міг управляти ним, нам потрібно додати наступний код, тільки перед цим замініть імя main на імя вашого скрипта, а також вкажіть шлях до середовища venv та самого скрипта. Сам скрипт в цьому ж репозиторію під назвою **[supervisor_config](https://github.com/andrii-petlovanyi/nginx-nodejs_mysetup/blob/main/supervisor_config)**. 
 
 _Зверніть увагу, конфігурацію дану Ви можете при потребі змінити під себе, чи навіть забрати непотрібні параметри. Цей конфіг писався під мої потреби._
 
